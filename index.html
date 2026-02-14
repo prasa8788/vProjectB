@@ -105,30 +105,15 @@
     function nextQuestion(optionClicked) {
       const q = questions[current];
 
-      // Handle "No" click for 'Are you happy with me?'
-      // Only add moving No button for the Valentine question
-	if(q.valentine) {
-		const noBtn = document.createElement("button");
-		noBtn.innerText = "No 😢";
-		noBtn.className = "no";
-		noBtn.onmouseover = () => moveNoButton(noBtn); // makes it dodge
-		buttonsDiv.appendChild(noBtn);
-		}
+      if(q.handleNo && optionClicked === "No 😢") {
+        document.getElementById("response").innerText = "You broke my heart 💔. But do you want to change your answer?";
+        const buttonsDiv = document.getElementById("buttons");
+        buttonsDiv.innerHTML = `<button class="yes" onclick="changeAnswer()">Yes 💖</button>`;
+        return;
+      }
 
-      // Handle Valentine click
       if(q.valentine) {
         showConfetti();
-		function moveNoButton(button) {
-			const maxX = window.innerWidth - button.offsetWidth - 20;
-			const maxY = window.innerHeight - button.offsetHeight - 20;
-
-			const randomX = Math.random() * maxX;
-			const randomY = Math.random() * maxY;
-
-			button.style.position = "absolute";
-			button.style.left = randomX + "px";
-			button.style.top = randomY + "px";
-			}
         document.getElementById("response").innerText = "Cheers! You reached the ultimate level :D";
         setTimeout(() => {
           current++;
@@ -142,7 +127,6 @@
       if(current < questions.length) {
         showQuestion();
       } else {
-        // Final step after "Will you marry me?"
         document.getElementById("question").innerText = "Call me if your answer is Yes! ❤️📞";
         document.getElementById("buttons").innerHTML = "";
         document.getElementById("response").innerText = "";
@@ -150,9 +134,7 @@
     }
 
     function changeAnswer() {
-      // Clear the heartbreak message
       document.getElementById("response").innerText = "";
-      // Navigate back to 'Are you happy with me?' question
       current--; 
       showQuestion();
     }
@@ -177,16 +159,16 @@
         buttonsDiv.appendChild(btn);
       });
 
-      if(q.handleNo && !q.options.includes("No 😢")) {
+      // MOVING NO BUTTON ONLY FOR VALENTINE QUESTION
+      if(q.valentine) {
         const noBtn = document.createElement("button");
         noBtn.innerText = "No 😢";
         noBtn.className = "no";
-        noBtn.onclick = () => nextQuestion("No 😢");
+        noBtn.onmouseover = () => moveNoButton(noBtn);
         buttonsDiv.appendChild(noBtn);
       }
     }
 
-    // Simple confetti effect
     function showConfetti() {
       for(let i=0; i<100; i++){
         const confetti = document.createElement('div');
@@ -197,5 +179,19 @@
         setTimeout(() => confetti.remove(), 3000);
       }
     }
+
+    // MOVING NO BUTTON FUNCTION
+    function moveNoButton(button) {
+      const maxX = window.innerWidth - button.offsetWidth - 20;
+      const maxY = window.innerHeight - button.offsetHeight - 20;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      button.style.position = "absolute";
+      button.style.left = randomX + "px";
+      button.style.top = randomY + "px";
+    }
   </script>
 </body>
+</html>
