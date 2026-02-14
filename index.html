@@ -1,148 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Love Quiz 💖</title>
-<style>
-body { font-family: Arial, sans-serif; background: #fff0f3; display: flex; height: 100vh; justify-content: center; align-items: center; text-align: center; margin: 0; overflow: hidden; }
-.card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 550px; position: relative; z-index: 10; }
-button { padding: 12px 20px; margin: 10px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
-.yes { background: #ff4d6d; color: white; }
-.no { background: #adb5bd; color: white; position: relative; }
-#response { font-size: 16px; margin-top: 20px; color: #ff4d6d; }
-.promise-text { font-size: 16px; line-height: 1.5; text-align: left; }
-.confetti-piece { position: absolute; width: 8px; height: 8px; background-color: red; pointer-events: none; z-index: 999; border-radius: 50%; animation: fall 3s linear forwards; }
-@keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(600px) rotate(360deg); opacity: 0; } }
-</style>
+  <meta charset="UTF-8">
+  <title>Love Quiz 💖</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff0f3;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 550px;
+      position: relative;
+      z-index: 10;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background: #adb5bd;
+      color: white;
+      position: relative;
+    }
+
+    #response {
+      font-size: 16px;
+      margin-top: 20px;
+      color: #ff4d6d;
+    }
+
+    .promise-text {
+      font-size: 16px; /* Normal size */
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: red;
+      pointer-events: none;
+      z-index: 999;
+      border-radius: 50%;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(600px) rotate(360deg); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
-<div class="card">
-<h1 id="question">Hi Handsome! Good Morning! Hope you slept well :) May I ask you some questions?</h1>
-<div id="buttons">
-<button class="yes" onclick="nextQuestion('Yes')">Yes 😍 (No other option 😏)</button>
-</div>
-<p id="response"></p>
-</div>
-<script>
-const questions = [
-    { text: "Do you love me?", options: ["Yes ❤️"] },
-    { text: "Are you happy with me?", options: ["Yes 😊", "No 😢"], handleNo: true },
-    { text: "Would you promise to stand by my side as my equal partner, to ensure our love continues to grow?", options: ["Yes 💖"] },
-    { text: "Would you promise to keep your small OCD as it is?", options: ["Yes 😅"] },
-    { text: "Would you promise to be my best friend, to laugh with me, and to encourage me in all my dreams?", options: ["Yes 💕"] },
-    { text: "Would you promise to kiss me, hug me, love me, even if I don't want to?", options: ["Yes 😘"] },
-    { text: "Would you promise to dance with me in the rain?", options: ["Yes 🌧️"] },
-    { text: "Would you promise to eat ice cream at midnight?", options: ["Yes 🍦"] },
-    { text: "You cleared this level! ♟️", options: ["Next ❤️"] },
-    { text: "Bunny, I promise to choose you today, and I will choose you again tomorrow. I promise to walk beside you, no matter where life takes us. I promise to always listen with an open heart, especially when things are quiet. I promise to be here not just for the good times, but for all of it. I promise not to let you forget how much you are loved. I promise to be your safe place when the world feels heavy. I promise to love you till my last breath.", options: ["Next 💕"], isPromise: true },
-    { text: "Will you be my Valentine?", options: ["Yes 💖"], valentine: true },
-    { text: "Will you marry me?", options: ["Yes 💍"], final: true }
-];
+  <div class="card">
+    <h1 id="question">Hi Handsome! Good Morning! Hope you slept well :) May I ask you some questions?</h1>
+    <div id="buttons">
+      <button class="yes" onclick="nextQuestion('Yes')">Yes 😍 (No other option 😏)</button>
+    </div>
+    <p id="response"></p>
+  </div>
 
-let current = 0;
+  <script>
+    const questions = [
+      { text: "Do you love me?", options: ["Yes ❤️"] },
+      { text: "Are you happy with me?", options: ["Yes 😊", "No 😢"], handleNo: true },
+      { text: "Would you promise to stand by my side as my equal partner, to ensure our love continues to grow?", options: ["Yes 💖"] },
+      { text: "Would you promise to keep your small OCD as it is?", options: ["Yes 😅"] },
+      { text: "Would you promise to be my best friend, to laugh with me, and to encourage me in all my dreams?", options: ["Yes 💕"] },
+      { text: "Would you promise to kiss me, hug me, love me, even if I don't want to?", options: ["Yes 😘"] },
+      { text: "Would you promise to dance with me in the rain?", options: ["Yes 🌧️"] },
+      { text: "Would you promise to eat ice cream at midnight?", options: ["Yes 🍦"] },
+      { text: "You cleared this level! ♟️", options: ["Next ❤️"] },
+      { 
+        text: "Bunny, I promise to choose you today, and I will choose you again tomorrow. I promise to walk beside you, no matter where life takes us. I promise to always listen with an open heart, especially when things are quiet. I promise to be here not just for the good times, but for all of it. I promise not to let you forget how much you are loved. I promise to be your safe place when the world feels heavy. I promise to love you till my last breath.", 
+        options: ["Next 💕"], 
+        isPromise: true 
+      },
+      { text: "Will you be my Valentine?", options: ["Yes 💖"], valentine: true },
+      { text: "Will you marry me?", options: ["Yes 💍"], final: true }
+    ];
 
-function nextQuestion(optionClicked) {
-    const q = questions[current];
+    let current = 0;
 
-    if(q.handleNo && optionClicked === "No 😢") {
+    function nextQuestion(optionClicked) {
+      const q = questions[current];
+
+      // Handle "No" click for 'Are you happy with me?'
+      if(q.handleNo && optionClicked === "No 😢") {
         document.getElementById("response").innerText = "You broke my heart 💔. But do you want to change your answer?";
         const buttonsDiv = document.getElementById("buttons");
         buttonsDiv.innerHTML = `<button class="yes" onclick="changeAnswer()">Yes 💖</button>`;
         return;
-    }
+      }
 
-    if(q.valentine) {
+      // Handle Valentine click
+      if(q.valentine) {
         showConfetti();
         document.getElementById("response").innerText = "Cheers! You reached the ultimate level :D";
         setTimeout(() => {
-            current++;
-            showQuestion();
-            document.getElementById("response").innerText = "";
+          current++;
+          showQuestion();
+          document.getElementById("response").innerText = "";
         }, 2000);
         return;
-    }
+      }
 
-    current++;
-    if(current < questions.length) {
+      current++;
+      if(current < questions.length) {
         showQuestion();
-    } else {
+      } else {
+        // Final step after "Will you marry me?"
         document.getElementById("question").innerText = "Call me if your answer is Yes! ❤️📞";
         document.getElementById("buttons").innerHTML = "";
         document.getElementById("response").innerText = "";
+      }
     }
-}
 
-function changeAnswer() {
-    document.getElementById("response").innerText = "";
-    current--;
-    showQuestion();
-}
+    function changeAnswer() {
+      // Clear the heartbreak message
+      document.getElementById("response").innerText = "";
+      // Navigate back to 'Are you happy with me?' question
+      current--; 
+      showQuestion();
+    }
 
-function showQuestion() {
-    const q = questions[current];
-    document.getElementById("question").innerText = q.text;
-    const buttonsDiv = document.getElementById("buttons");
-    buttonsDiv.innerHTML = "";
-    if(q.isPromise) {
+    function showQuestion() {
+      const q = questions[current];
+      document.getElementById("question").innerText = q.text;
+      const buttonsDiv = document.getElementById("buttons");
+      buttonsDiv.innerHTML = "";
+
+      if(q.isPromise) {
         document.getElementById("question").className = "promise-text";
-    } else {
+      } else {
         document.getElementById("question").className = "";
-    }
-    q.options.forEach(opt => {
+      }
+
+      q.options.forEach(opt => {
         const btn = document.createElement("button");
         btn.innerText = opt;
         btn.className = "yes";
         btn.onclick = () => nextQuestion(opt);
         buttonsDiv.appendChild(btn);
-    });
-    if(q.handleNo && !q.options.includes("No 😢")) {
+      });
+
+      // Moving No button ONLY for Valentine question
+      if(q.valentine) {
+        const noBtn = document.createElement("button");
+        noBtn.innerText = "No 😢";
+        noBtn.className = "no";
+        noBtn.onmouseover = () => moveNoButton(noBtn);
+        buttonsDiv.appendChild(noBtn);
+      }
+
+      // Regular No button for other questions (if any)
+      if(q.handleNo && !q.options.includes("No 😢")) {
         const noBtn = document.createElement("button");
         noBtn.innerText = "No 😢";
         noBtn.className = "no";
         noBtn.onclick = () => nextQuestion("No 😢");
         buttonsDiv.appendChild(noBtn);
+      }
     }
 
-    if(q.valentine) {
-        addMovingNoButton();
-    }
-}
-
-// Confetti
-function showConfetti() {
-    for(let i=0; i<100; i++){
+    // Confetti effect
+    function showConfetti() {
+      for(let i = 0; i < 100; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti-piece';
         confetti.style.left = Math.random() * window.innerWidth + 'px';
         confetti.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
         document.body.appendChild(confetti);
         setTimeout(() => confetti.remove(), 3000);
+      }
     }
-}
 
-// Moving No button for Valentine question
-function addMovingNoButton() {
-    const buttonsDiv = document.getElementById("buttons");
-    const noBtn = document.createElement("button");
-    noBtn.innerText = "No 😢";
-    noBtn.className = "no";
-    noBtn.style.position = "absolute";
+    // Moving No button function for Valentine question
+    function moveNoButton(button) {
+      const maxX = window.innerWidth - button.offsetWidth - 20;
+      const maxY = window.innerHeight - button.offsetHeight - 20;
 
-    buttonsDiv.appendChild(noBtn);
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
 
-    noBtn.addEventListener("mouseover", () => {
-        const cardRect = document.querySelector(".card").getBoundingClientRect();
-        const maxX = cardRect.width - noBtn.offsetWidth;
-        const maxY = cardRect.height - noBtn.offsetHeight;
-        const x = Math.random() * maxX;
-        const y = Math.random() * maxY;
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-    });
-
-    noBtn.onclick = () => nextQuestion("No 😢");
-}
-
-</script>
+      button.style.position = "absolute";
+      button.style.left = randomX + "px";
+      button.style.top = randomY + "px";
+    }
+  </script>
 </body>
 </html>
