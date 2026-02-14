@@ -106,16 +106,29 @@
       const q = questions[current];
 
       // Handle "No" click for 'Are you happy with me?'
-      if(q.handleNo && optionClicked === "No 😢") {
-        document.getElementById("response").innerText = "You broke my heart 💔. But do you want to change your answer?";
-        const buttonsDiv = document.getElementById("buttons");
-        buttonsDiv.innerHTML = `<button class="yes" onclick="changeAnswer()">Yes 💖</button>`;
-        return;
-      }
+      // Only add moving No button for the Valentine question
+	if(q.valentine) {
+		const noBtn = document.createElement("button");
+		noBtn.innerText = "No 😢";
+		noBtn.className = "no";
+		noBtn.onmouseover = () => moveNoButton(noBtn); // makes it dodge
+		buttonsDiv.appendChild(noBtn);
+		}
 
       // Handle Valentine click
       if(q.valentine) {
         showConfetti();
+		function moveNoButton(button) {
+			const maxX = window.innerWidth - button.offsetWidth - 20;
+			const maxY = window.innerHeight - button.offsetHeight - 20;
+
+			const randomX = Math.random() * maxX;
+			const randomY = Math.random() * maxY;
+
+			button.style.position = "absolute";
+			button.style.left = randomX + "px";
+			button.style.top = randomY + "px";
+			}
         document.getElementById("response").innerText = "Cheers! You reached the ultimate level :D";
         setTimeout(() => {
           current++;
